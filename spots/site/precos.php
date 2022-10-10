@@ -7,7 +7,7 @@
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/divstruct.css" rel="stylesheet" type="text/css">
     <link href="../css/styles.css" rel="stylesheet" type="text/css">
-    <title>Página Inicial</title>
+    <title>Preços</title>
 </head>
 <body>
 <?php include("../other/header.html");?>
@@ -16,7 +16,7 @@
 
     <div class="d-flex justify-content-around">
     <div class="card cartao" style="width: 18rem;">
-    <img class="card-img-top cartaoImg" src="../imgs/cavalo.jpg" alt="Card image cap">
+    <img class="card-img-top precoImg" src="../imgs/cavalo.jpg" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">Cavalo Marinho</h5>
         <p class="card-text">Pode criar um anuncio no nosso site.</p>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="card cartao" style="width: 18rem;">
-    <img class="card-img-top cartaoImg" src="../imgs/camaleao.jpg" alt="Card image cap">
+    <img class="card-img-top precoImg" src="../imgs/camaleao.jpg" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">Camaleão</h5>
         <p class="card-text">Pode criar um anuncio no nosso site e terá prioridade nas pesquisas.</p>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="card cartao" style="width: 18rem;">
-    <img class="card-img-top cartaoImg" src="../imgs/cegonha.jpg" alt="Card image cap">
+    <img class="card-img-top precoImg" src="../imgs/cegonha.jpg" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">Cegonha</h5>
         <p class="card-text">Pode criar um anuncio no nosso site, terá mais prioridade nas pesquisas e aparecerá na primeira página.</p>
