@@ -13,7 +13,8 @@
 <body>
 <?php include("../other/header.html");?>
 <div id="main">
-    <p class="h1 text-center">Titulo</p>
+    <!-- Image text -->
+    <p class="h1 text-center" id="title"></p>
 
     <!-- Container for the image gallery -->
 <div class="container">
@@ -21,17 +22,17 @@
 <!-- Full-width images with number text -->
 <div class="mySlides">
   <div class="numbertext">1 / 3</div>
-    <img class="img-fluid rounded mx-auto d-block" src="../imgs/1.jpg">
+    <img class="demoP img-fluid rounded mx-auto d-block" src="../imgs/1.jpg" alt="tit1">
 </div>
 
 <div class="mySlides">
   <div class="numbertext">2 / 3</div>
-    <img class="img-fluid rounded mx-auto d-block" src="../imgs/2.jpg">
+    <img class="demoP img-fluid rounded mx-auto d-block" src="../imgs/2.jpg" alt="tit2">
 </div>
 
 <div class="mySlides">
   <div class="numbertext">3 / 3</div>
-    <img class="img-fluid rounded mx-auto d-block" src="../imgs/3.jpg">
+    <img class="demoP img-fluid rounded mx-auto d-block" src="../imgs/3.jpg" alt="tit3">
 </div>
 
 <!-- Next and previous buttons -->
@@ -46,26 +47,18 @@
 <!-- Thumbnail images -->
 <div class="row">
   <div class="column">
-    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/1.jpg" onclick="currentSlide(1)" alt="Text">
+    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/1.jpg" onclick="currentSlide(1)" alt="Text1">
   </div>
   <div class="column">
-    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/2.jpg" onclick="currentSlide(2)" alt="Text">
+    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/2.jpg" onclick="currentSlide(2)" alt="Text2">
   </div>
   <div class="column">
-    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/3.jpg" onclick="currentSlide(3)" alt="Text">
-  </div>
-  <div class="column">
-    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/3.jpg" onclick="currentSlide(4)" alt="Text">
-  </div>
-  <div class="column">
-    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/3.jpg" onclick="currentSlide(5)" alt="Text">
-  </div>
-  <div class="column">
-    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/3.jpg" onclick="currentSlide(6)" alt="Text">
+    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/3.jpg" onclick="currentSlide(3)" alt="Text3">
   </div>
 </div>
-<script>
+<script type="text/javascript">
     currentSlide(slideIndex);
+    plusSlidesAuto(0);
 </script>
 </div>
 </div>

@@ -18,6 +18,11 @@
     height: 100%;
 }
 
+.estabLogo{
+    width: 5rem;
+    height: 5rem;
+}
+
 .btn{
     display: inline-block;
 }
