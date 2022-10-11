@@ -1,0 +1,11 @@
+ <div class="btn-group-toggle" data-toggle="badges">
+        <label class="badge badge-secondary text-capitalize active">
+            <input type="checkbox" name="tags" checked autocomplete="off"> Restaurante
+        </label>
+        <label class="badge badge-secondary text-capitalize active">
+            <input type="checkbox" name="tags" checked autocomplete="off"> Café
+        </label>
+        <label class="badge badge-secondary text-capitalize active">
+            <input type="checkbox" name="tags" checked autocomplete="off"> Cinema
+        </label>
+    </div>

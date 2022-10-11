@@ -40,25 +40,23 @@
                 </div>
                 <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="mail@mail.com">
             </div>
-            <div class="d-flex bd-highlight">
-                <div class="input-group flex-fill mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">&#128241; Telemóvel</span>
-                    </div>
-                    <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="9888888">
-                </div>  
-                <div class="input-group flex-fill mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">&#9742; Telefone</span>
-                    </div>
-                    <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="9888888">
-                </div> 
-                <div class="input-group flex-fill mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">&#128224; Fax</span>
-                    </div>
-                    <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="9888888">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">&#128241; Telemóvel</span>
                 </div>
+                <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="9888888">
+            </div>  
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">&#9742; Telefone</span>
+                </div>
+                <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="9888888">
+            </div> 
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">&#128224; Fax</span>
+                </div>
+                <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="9888888">
             </div>
         </li>
         </ul>
