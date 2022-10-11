@@ -7,6 +7,7 @@
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/divstruct.css" rel="stylesheet" type="text/css">
     <link href="../css/styles.css" rel="stylesheet" type="text/css">
+    <script src="../jscript/searchtags.js"></script>
     <title>Lista</title>
 </head>
 <body>
@@ -20,6 +21,28 @@
         </div>
         <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Pesquisar...">
       </div>
+
+    <p>
+        <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Mais
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+    <div class="btn-group-toggle" data-toggle="badges" id="tagList">
+        <label class="badge badge-secondary text-capitalize active">
+            <input type="checkbox" name="tags" id="restaurante" checked> Restaurante
+        </label>
+        <label class="badge badge-secondary text-capitalize active">
+            <input type="checkbox" name="tags" id="cafe" checked> Café
+        </label>
+        <label class="badge badge-secondary text-capitalize active">
+            <input type="checkbox" name="tags" id="cinema"> Cinema
+        </label>
+        <label class="badge badge-secondary text-capitalize active">
+            <input type="checkbox" name="tags" id="agua" checked> Água
+        </label>
+    </div>
+    </div>
     </div>
     <div class="d-flex flex-column">
         <fieldset class="border border-warning destaques" style="margin-bottom: 1rem">
@@ -31,9 +54,9 @@
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
-                        <h5 class="card-title">Restaurante</h5>
+                        <h5 class="card-title" name="estab" id="ud">Restaurante</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
-                        <p class="card-text"><a href="#" class="badge badge-secondary text-capitalize">Restaurante</a> <a href="#" class="badge badge-secondary text-capitalize">Peixe</a> <a href="#" class="badge badge-secondary text-capitalize">Portugues</a> <a href="#" class="badge badge-secondary text-capitalize">Barato</a> <a href="#" class="badge badge-secondary text-capitalize">Frutos do Mar</a> <a href="#" class="badge badge-secondary text-capitalize">Carne</a> <a href="#" class="badge badge-secondary text-capitalize">Secundario</a></p>
+                        <p class="card-text"><a href="#" class="badge badge-secondary text-capitalize" name="ud" id="restaurante">Restaurante</a> <a href="#" class="badge badge-secondary text-capitalize" name="ud" id="agua">Água</a> <a href="#" class="badge badge-secondary text-capitalize">Portugues</a> <a href="#" class="badge badge-secondary text-capitalize">Barato</a> <a href="#" class="badge badge-secondary text-capitalize">Frutos do Mar</a> <a href="#" class="badge badge-secondary text-capitalize">Carne</a> <a href="#" class="badge badge-secondary text-capitalize">Secundario</a></p>
                         <p class="card-text"><small class="text-muted">3 mins atras</small> <a class="btn btn-info float-md-right text-capitalize" href="estab.php" role="button">Ver</a></p>
                         
                     </div>
@@ -48,13 +71,15 @@
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
-                        <h5 class="card-title">Restaurante</h5>
+                        <h5 class="card-title" name="estab" id="id">Café</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
+                        <p class="card-text"><a href="#" class="badge badge-secondary text-capitalize" name="id" id="cafe">Café</a><a href="#" class="badge badge-secondary text-capitalize" name="id" id="agua">Água</a></p>
                         <p class="card-text"><small class="text-muted">3 mins atras</small> <a class="btn btn-info float-md-right text-capitalize" href="estab.php" role="button">Ver</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>searchTags();</script>
 </body>
 </html>

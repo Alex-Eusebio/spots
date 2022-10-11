@@ -1,4 +1,4 @@
-var myInput = document.getElementById("psw");
+var myInput = document.getElementById("inputPassword");
 var letter = document.getElementById("letter");
 var capital = document.getElementById("capital");
 var number = document.getElementById("number");
@@ -47,11 +47,20 @@ myInput.onkeyup = function() {
   }
   
   // Validate length
-  if(myInput.value.length >= 8) {
+  if(myInput.value.length >= 8 && myInput.value.length <= 25) {
     length.classList.remove("invalid");
     length.classList.add("valid");
   } else {
     length.classList.remove("valid");
     length.classList.add("invalid");
+  }
+}
+
+function checkPass() {
+  var x = document.getElementById("inputPassword");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
   }
 }
