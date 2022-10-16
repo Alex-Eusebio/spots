@@ -155,12 +155,6 @@ class Users{
             if ($pfp == "")
                 $pfp="default.png";
 
-            if ($isadmin){
-                $color = "eb0000";
-            } else {
-                $color = "dbdbdb";
-            }
-
             ?><div class="diviewi">
             <div class="diiew">
                 <div class="divview" style="border-color: #<?=$color?>">
@@ -184,9 +178,6 @@ class Users{
                     foreach($likes as $row){
                         $id=$row['op_id'];
                         $name=$row['op_name'];
-                        $rarity=$row['op_rarity'];
-                        $branch=$row['branch'];
-                        $class=$row['class'];
                         $icon = $row['op_icon'];
                         $gender = $row['op_gender'];
 
@@ -206,19 +197,6 @@ class Users{
                         } else {
                             $color = "8a8888";
                         }
-                        ?>
-                        <a href='view.php?id=<?=$id?>'>
-                            <div class="cxzita" style="border-color: #<?=$color?>">
-                                <div class="verticalLine"><img src="imgs/classes/<?=$class?>.avif"></div>
-                                <img src="imgs/branches/<?=$branch?>.avif"><br>
-                                <img id="imgIcon"src="imgs/characters/icon/<?=$icon?>.png"><p id='tIndex'><?=$name?></p><?php
-                                for($i=0; $i<$rarity; $i++){
-                                    echo "⭐";
-                                }?>
-                                <br>
-                            </div>
-                        </a>
-                        <?php ;
                     } 
                     ?>
                     </section>
