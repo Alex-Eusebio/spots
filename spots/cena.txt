@@ -1,18 +1,18 @@
 possivel sistema de procura de tags
- <div class="btn-group-toggle" data-toggle="badges">
-        <label class="badge badge-secondary text-capitalize active">
-            <input type="checkbox" name="tags" checked autocomplete="off"> Restaurante
-        </label>
-        <label class="badge badge-secondary text-capitalize active">
-            <input type="checkbox" name="tags" checked autocomplete="off"> Café
-        </label>
-        <label class="badge badge-secondary text-capitalize active">
-            <input type="checkbox" name="tags" checked autocomplete="off"> Cinema
-        </label>
-    </div>
+<div class="btn-group-toggle" data-toggle="badges">
+    <label class="badge badge-secondary text-capitalize active">
+        <input type="checkbox" name="tags" checked autocomplete="off"> Restaurante
+    </label>
+    <label class="badge badge-secondary text-capitalize active">
+        <input type="checkbox" name="tags" checked autocomplete="off"> Café
+    </label>
+    <label class="badge badge-secondary text-capitalize active">
+        <input type="checkbox" name="tags" checked autocomplete="off"> Cinema
+    </label>
+</div>
 
 caixa de alerta com butao
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong>Holy guacamole!</strong> You should check in on some of those fields below.
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -20,6 +20,9 @@ caixa de alerta com butao
 </div>
 
 barra animada
-        <div class="progress">
+<div class="progress">
   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%"></div>
 </div>
+
+Possivelmento oq vou usar para pagamentos
+https://www.easypay.pt/api/

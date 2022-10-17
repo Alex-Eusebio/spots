@@ -29,13 +29,13 @@ class Users{
                     foreach($dados as $row){
                         // guardar como var local a info retornada da BD: a password encriptada e o nivel de acesso
                     $passBd=$row['pass'];
-                    $nivel =$row['isadmin'];
+                    $nivel =$row['nivel'];
                     
                     // Verificar se a pass preenchida corresponde à pass armazenada na BD
-                    if(password_verify($pass,$passBd)/*$pass==$passBd*/){
+                    if(password_verify($pass,$passBd)){
                         $_SESSION['id']=$row['id'];
                         $_SESSION['user']=$user;
-                        $_SESSION['isadmin']=$nivel;
+                        $_SESSION['nivel']=$nivel;
                     }else{
                         $msgLog= "<p class='warnError'>A password está incorreta</p>";
                     }    
@@ -57,46 +57,33 @@ class Users{
 
     function login2($msgLog=""){
         // se já há dados do user na SESSION é pq já estamos logados (escondemos o formulário)
-     if(isset($_SESSION['user'])){
-         $user=$_SESSION['user'];
-         $id=$_SESSION['id'];
-         $msgLog = "<p id='text'>Bem-vindo Doutor $user.<br><a href='profile.php?id=$id'>Perfil</a>|<a href='includes/logout.php'>Logout</a></p>";
-         echo '
-         <table id="logTab">
-             <tr>
-                 <td colspan="4">'.$msgLog.'</td>
-             </tr>
-         </table>';
-     }else{  // se não há SESSION então temos de nos logar (mostramos o formulário e a linha do msgLog: q pode trazer um erro ou o vazio "") 
-         echo 
-         '<form method="POST" action="">
-         <table id="logTab">
-             <tr>
-                 <td>
-                     <input type="text" class="logInput" name="fuser" required  placeholder="Nome">
-                 </td>
-                 <td>
-                     <input type="password" class="logInput" name="fpass" required  placeholder="Password">
-                 </td>
-                 <td>
-                     <input type="submit" name="sub" value="Login">
-                 </td>
-                 <td>
-                     <input type="submit" name="sub" value="Registar">
-                 </td>
-             </tr>
-             <tr>
-                 <td colspan="4">'.$msgLog.'</td>
-             </tr>
-         </table>
-     </form>';
-     }
- }
+        if(isset($_SESSION['user'])){
+            $user=$_SESSION['user'];
+            $id=$_SESSION['id'];
+            $msgLog = '<div class="login-container">
+                <a class="btn btn-secondary text-capitalize" href="perfil.php" role="button">Perfil</a> 
+                <a class="btn btn-secondary text-capitalize" href="regist.php" role="button">Sair</a>
+            </div>';
+            
+            echo '
+            <table id="logTab">
+                <tr>
+                    <td colspan="4">'.$msgLog.'</td>
+                </tr>
+            </table>';
+        }else{  // se não há SESSION então temos de nos logar (mostramos o formulário e a linha do msgLog: q pode trazer um erro ou o vazio "") 
+            echo 
+            '<div class="login-container">
+                <a class="btn btn-secondary text-capitalize" href="login.php" role="button">Login</a> 
+                <a class="btn btn-secondary text-capitalize" href="regist.php" role="button">Registrar</a>
+            </div>';
+        }
+    }
  
-    public function createUser($name, $mail, $pass, $admLvl){
+    public function createUser($name, $mail, $pass, $tele, $admLvl){
         $pass = password_hash($pass, PASSWORD_DEFAULT);
         $time = date('d-m-y h:i:s');
-        $sql="INSERT INTO users (nome, mail, pass, dataJoin, isadmin) VALUES ('$name', '$mail', '$pass', '$time', $admLvl)";
+        $sql="INSERT INTO users (nome, mail, pass, dataJoin, nivel, telemovel) VALUES ('$name', '$mail', '$pass', '$time', $admLvl, '$tele')";
     
         $con = $this->conexao;
         $resultado=$con->query($sql);
@@ -150,59 +137,35 @@ class Users{
         foreach($dados as $row){
             $name = $row["name"];
             $pfp = $row["profilepic"];
-            $isadmin = $row["isadmin"];
+            $nivel = $row["nivel"];
+            $mail = $row["mail"];
+            $tele = $row["telemovel"];
 
             if ($pfp == "")
                 $pfp="default.png";
 
-            ?><div class="diviewi">
-            <div class="diiew">
-                <div class="divview" style="border-color: #<?=$color?>">
-                    <img id="imgPfpBig"src="imgs/pfp/<?=$pfp?>"><p id='tIndex'><?=$name?></p>
-                </div>
-                <?php if (isset($_SESSION["isadmin"])){
-                    if ($_SESSION["isadmin"] == 1 || $_SESSION["id"] == $_GET["id"]){
-                        ?><div class="divv">
-                        <a href="edit_user.php?id=<?=$_GET["id"]?>" id="update">Update</a>
-                        <a href="delete_user.php?id=<?=$_GET["id"]?>" id="delete">Delete</a>
-                        </div><?php
-                    }
-                }?> 
-            </div>
-            <div class="nextImgDiv">
-                <div class="divvview">
-                    <label id="smallTitle">Favoritos</label><br>
-                    <section class="cxsite">
-                    <?php $likes = $this->getLikes($_GET['id']);
-
-                    foreach($likes as $row){
-                        $id=$row['op_id'];
-                        $name=$row['op_name'];
-                        $icon = $row['op_icon'];
-                        $gender = $row['op_gender'];
-
-                        if ($icon == ""){
-                            switch ($gender) {
-                                case 0:
-                                    $icon="default_m";
-                                    break;
-                                case 1:
-                                    $icon="default_f";
-                                    break;
-                            }
-                        }
-
-                        if ($row['op_color'] != null){
-                            $color = $row['op_color'];
-                        } else {
-                            $color = "8a8888";
-                        }
-                    } 
-                    ?>
-                    </section>
-                </div>
-            </div>
-        </div><?php
+            ?><p class="h1 text-center text-capitalize notranslate">User Exemplo</p>
+            <div class="card mb-3">
+                <div class="card-body">
+                <li class="media">
+                    <img class="mr-3 estabLogo" src="../pfp/<?=$pfp?>" alt="Generic placeholder image">
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">&#128231; Email</span>
+                        </div>
+                        <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$mail?>">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">&#128241; Telemóvel</span>
+                            </div>
+                            <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="<?$tele?>">
+                        </div>
+                    </li>
+                    </ul>
+                </li><?php
         }
     }
 
