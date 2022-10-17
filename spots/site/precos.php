@@ -20,7 +20,7 @@
     <div class="card-body">
         <h5 class="card-title">Cavalo Marinho</h5>
         <p class="card-text">Pode criar um anuncio no nosso site.</p>
-        <a href="#" class="btn btn-primary align-text-bottom">PRECO GOES HERE</a>
+        <a href="#" class="btn btn-primary align-text-bottom">00.00€</a>
     </div>
     </div>
 
@@ -28,8 +28,8 @@
     <img class="card-img-top precoImg" src="../imgs/camaleao.jpg" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">Camaleão</h5>
-        <p class="card-text">Pode criar um anuncio no nosso site e terá prioridade nas pesquisas.</p>
-        <a href="#" class="btn btn-primary align-text-bottom">PRECO GOES HERE</a>
+        <p class="card-text">Pode criar um anuncio no nosso site, terá prioridade nas pesquisas e poderá aparecer nos destaques.</p>
+        <a href="#" class="btn btn-primary align-text-bottom">00.00€</a>
     </div>
     </div>
 
@@ -37,8 +37,8 @@
     <img class="card-img-top precoImg" src="../imgs/cegonha.jpg" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">Cegonha</h5>
-        <p class="card-text">Pode criar um anuncio no nosso site, terá mais prioridade nas pesquisas e aparecerá na primeira página.</p>
-        <a href="#" class="btn btn-primary align-text-middle">PRECO GOES HERE</a>
+        <p class="card-text">Pode criar um anuncio no nosso site, terá mais prioridade nas pesquisas, poderá aparecer nos destaques e aparecerá na primeira página.</p>
+        <a href="#" class="btn btn-primary align-text-middle">00.00€</a>
     </div>
     </div>
     </div>

@@ -1,5 +1,5 @@
 <?php
-class Talents{
+class Tags{
     private $conexao;
 
     public function __construct(){
@@ -12,8 +12,8 @@ class Talents{
         unset($this->conexao);
     }
 
-    public function showOne($id){
-        $sql="SELECT * FROM talents WHERE id = $id";
+    public function showAll(){
+        $sql="SELECT * FROM categorias";
 
         $con = $this->conexao;
         $resultado=$con->query($sql);
@@ -21,29 +21,45 @@ class Talents{
         return $dados;
     }
 
-    public function infoTalent($dados){
-        foreach($dados as $row){
+    public function showOne($id){
+        $sql="SELECT * FROM categorias WHERE id = $id";
 
-            $name = $row["name"];
-            $description = $row["description"];
+        $con = $this->conexao;
+        $resultado=$con->query($sql);
+        $dados=$resultado->fetchAll();
+        return $dados;
+    }
+
+    public function infoTags($dados, $estabId){
+        foreach($dados as $row){
+            $id = $row["id"];
+            $name = $row["nome"];
 
             ?>
             
-            <div class="divvview">
-                <p id="t1"><?=$name?></p>
-                <label><?=$description?></label>
-            </div><?php
+            <a href="#" class="badge badge-secondary text-capitalize" name="<?=$estabId?>" id="<?=$id?>"><?=$name?></a><?php
+        }
+    }
+
+    public function searchTags($dados){
+        foreach($dados as $row){
+            $id = $row["id"];
+            $name = $row["nome"];
+
+            ?>
+            
+            <label class="badge badge-secondary text-capitalize active">
+                <input type="checkbox" name="tags" id="<?=$id?>" onclick="searchTags()"> <?=$name?>
+            </label><?php
         
         }
     }
 
     public function add($Pname){
         $name = $_POST[$Pname."Name"];
-        $desc = $_POST[$Pname."Desc"];
 
         /* definir uma instrucao SQL */
-        $sql="INSERT INTO talents (name, description)
-        VALUES ('$name', '$desc')";
+        $sql="INSERT INTO categotias (name) VALUES ('$name')";
 
         $con = $this->conexao;
         $resultado=$con->query($sql);

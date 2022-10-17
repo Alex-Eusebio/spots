@@ -1,5 +1,5 @@
 <?php
-class Users{
+class Estabs{
     private $conexao;
 
     public function __construct(){
@@ -14,8 +14,7 @@ class Users{
 
     public function showAll(){
         $sql="SELECT *
-        FROM users
-        ORDER BY dataJoin ASC";
+        FROM estabelecimentos";
         $con = $this->conexao;
         $resultado=$con->query($sql);
         $dados=$resultado->fetchAll();
@@ -81,137 +80,42 @@ class Users{
         ?></ul><?php
     }
 
-    public function infoOperatorView($dados){
+    public function infoEstabView($dados){
         foreach($dados as $row){
-        $name = $row["name"];
-        $gender = $row["gender"];
-        $rarity = $row["rarity"];
-
-        if ($row['color'] != null){
-            $color = $row['color'];
-        } else {
-            $color = "8a8888";
+            $id = $row["id"];
+            $name = $row["nome"];
+            $msg = $row["msg"];
+        
+            $tags = new Tags;
+            $result = $this->getTags($id);
+            ?>
+            <div class="card mb-3 mx-auto" style="max-width: 55rem;" id="<?=$id?>" name="estabCard">
+            <div class="row g-0">
+                <div class="col-md-5">
+                    <img src="../imgs/1.jpg" class="img-fluid rounded estabImg" alt="...">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title" name="estab"><?=$name?></h5>
+                        <p class="card-text"><?=$msg?></p>
+                        <p class="card-text"><?=$tags->infoTags($result, $id)?></p>
+                        <p class="card-text"><small class="text-muted notranslate">Manel Manel</small> <a class="btn btn-info float-md-right text-capitalize" href="estab.php" role="button">Ver</a></p>
+                    </div>
+                </div>
+            </div>
+            <?php
+        
         }
+    }
 
-        $pos = $row["pos"];
-        $branch = $row["branch"];
-        $branch_icon = $row["branch_icon"];
-        $branch_trait = $row["branch_trait"];
-        $class = $row["class"];
-        $class_icon = $row["class_icon"];
-
-        $maxhp = $row["maxhp"];
-        $attack = $row["attack"];
-        $defence = $row["defence"];
-        $magicresis = $row["magicresis"];
-        $block = $row["block"];
-        $attacktime = $row["attacktime"];
-
-        $skill1 = $row["skill1"];
-        $skill2 = $row["skill2"];
-        $skill3 = $row["skill3"];
-
-        $talent1 = $row["talent1"];                
-        $talent2 = $row["talent2"];
-
-        $portrait = $row["portrait"];
-
-        if ($portrait==""){
-            switch ($gender) {
-                case 0:
-                    $portrait="default_m";
-                    break;
-                case 1:
-                    $portrait="default_f";
-                    break;
-            }
-        }
-
-        $chibi = $row["chibi"];
-
-        if ($chibi==""){
-            switch ($gender) {
-                case 0:
-                    $chibi="default_m";
-                    break;
-                case 1:
-                    $chibi="default_f";
-                    break;
-            }
-        }
-
-        $skills = new Skills;
-        $talents = new Talents;
-
-        ?><img class="portrait"src="imgs/characters/portrait/<?=$portrait?>.png">
-        <div class="diiew">
-            <div class="divview" style="border-color: #<?=$color?>">
-            <div id="likeDiv">
-                <?php $this->checkLike($_GET['id'])?>
-            </div>
-                <section class="sectionName">
-                    <img src="imgs/characters/chibi/<?=$chibi?>.png" alt="<?=$chibi?>" id="chibi"><br>
-                        <label id='t1'><?=$name?> <?=$this->getGender($gender)?></label>
-                        <br>
-                        <?php
-                            for($i=0; $i<$rarity; $i++){
-                                echo "⭐";
-                            }
-                        ?>
-                </section>
-                <br>
-                <div class="horizontalLine"></div>
-                <div>
-                    <figure>
-                        <img src="imgs/classes/<?=$class_icon?>.avif" alt="<?=$class?>">
-                        <figcaption><?=$class?></figcaption>
-                    </figure>
-                    <figure>
-                        <img src="imgs/branches/<?=$branch_icon?>.avif" alt="<?=$branch?>">
-                        <figcaption><?=$branch?></figcaption>
-                    </figure>
-                </div>  
-            </div>
-            <div class="divvvview">
-                <label id="smallTitle">Estatisticas</label><br><br>
-                <label id="t1">Vida: </label><label id="text"><?= $maxhp ?></label><br>
-                <label id="t1">Ataque: </label><label id="text"><?= $attack ?></label><br>
-                <label id="t1">Defesa: </label><label id="text"><?= $defence ?></label><br>
-                <label id="t1">Defesa Mágica: </label><label id="text"><?= $magicresis ?></label><br>
-                <label id="t1">Bloqueio: </label><label id="text"><?= $block ?></label><br>
-                <label id="t1">Tempo de Ataque: </label><label id="text"><?= $attacktime ?></label>
-            </div>
-            <?php if (isset($_SESSION["isadmin"])){
-                if ($_SESSION["isadmin"] == 1){
-                    ?><div class="divv">
-                    <a href="update.php?id=<?=$_GET["id"]?>" id="update">Update</a>
-                    <a href="delete.php?id=<?=$_GET["id"]?>" id="delete">Delete</a>
-                    </div><?php
-                }
-            }?>  
-            
-        </div>
-        <div class="nextImgDiv">
-            <div class="divvview">
-                <img src="imgs/branches/<?=$branch_icon?>.avif" alt="<?=$branch?>" id="imgIcon">
-                <label id="smallTitle">Trait</label><br>
-                <label><?=$branch_trait?></label>
-            </div>
-            <?php if ($talent1 != NULL || $talent2 != NULL){?>
-            <div class="divvview">
-                <label id="smallTitle">Talents</label><br>
-                <?php if ($talent1 != NULL) $talents->infoTalent($talents->showOne($talent1));?>
-                <?php if ($talent2 != NULL) $talents->infoTalent($talents->showOne($talent2)); ?>
-            </div>
-            <?php } if ($skill1 != NULL || $skill2 != NULL || $skill3 != NULL){?>
-            <div class="divvview">
-                <label id="smallTitle">Skills</label><br>
-                <?php if ($skill1 != NULL) $skills->infoSkill($skills->showOne($skill1));?>
-                <?php if ($skill2 != NULL) $skills->infoSkill($skills->showOne($skill2));?>
-                <?php if ($skill3 != NULL) $skills->infoSkill($skills->showOne($skill3));;?>
-            </div> <?php } ?>
-        </div><?php
-        }
+    public function getTags($id){
+        $sql="SELECT id, nome FROM categorias 
+        INNER JOIN categorias_estab ON categorias.id = categorias_estab.categorias_id 
+        WHERE estab_id=$id";
+        $con = $this->conexao;
+        $resultado=$con->query($sql);
+        $dados=$resultado->fetchAll();
+        return $dados;
     }
 
     public function getGender($gender){
