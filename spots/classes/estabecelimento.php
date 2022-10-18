@@ -22,14 +22,8 @@ class Estabs{
     }
 
     public function showOne($id){
-        $sql = "SELECT operators.name AS name, operators.gender AS gender, operators.rarity AS rarity, operators.color AS color, operators.position AS pos, 
-            branch.name AS branch, branch.icon AS branch_icon, branch.trait AS branch_trait, class.name AS class, class.icon AS class_icon, 
-            operators.maxhp AS maxhp, operators.attack AS attack, operators.defence AS defence, operators.magicresis AS magicresis, 
-            operators.block AS block, operators.attacktime AS attacktime, operators.portrair AS portrait, operators.chibi AS chibi,
-            operators.skill1 AS skill1, operators.skill2 AS skill2, operators.skill3 AS skill3, operators.talent1 AS talent1,
-            operators.talent2 AS talent2, operators.icon AS icon
-            FROM operators INNER JOIN branch ON operators.branch = branch.id
-            INNER JOIN class ON branch.class = class.id WHERE operators.id = $id;";
+        $sql = "SELECT *
+        FROM estabelecimentos WHERE id = $id;";
         
         $con = $this->conexao;
         $resultado=$con->query($sql);
@@ -38,53 +32,15 @@ class Estabs{
     }
 
     public function infoOperatorIndex($dados){
-        foreach($dados as $row){
-            $id=$row['op_id'];
-            $name=$row['op_name'];
-            $rarity=$row['op_rarity'];
-            $branch=$row['branch'];
-            $class=$row['class'];
-            $icon = $row['op_icon'];
-            $gender = $row['op_gender'];
-
-            if ($icon == ""){
-                switch ($gender) {
-                    case 0:
-                        $icon="default_m";
-                        break;
-                    case 1:
-                        $icon="default_f";
-                        break;
-                }
-            }
-
-            if ($row['op_color'] != null){
-                $color = $row['op_color'];
-            } else {
-                $color = "8a8888";
-            }
-            ?>
-            <li><a href='view.php?id=<?=$id?>'>
-                <div class="cxzita" style="border-color: #<?=$color?>">
-                    <div class="verticalLine"><img src="imgs/classes/<?=$class?>.avif"></div>
-                    <img src="imgs/branches/<?=$branch?>.avif"><br>
-                    <img id="imgIcon"src="imgs/characters/icon/<?=$icon?>.png"><p id='tIndex'><?=$name?></p><?php
-                    for($i=0; $i<$rarity; $i++){
-                        echo "⭐";
-                    }?>
-                    <br>
-                </div>
-            </a></li>
-            <?php ;
-        } 
-        ?></ul><?php
+        
     }
 
-    public function infoEstabView($dados){
+    public function infoEstabList($dados){
         foreach($dados as $row){
             $id = $row["id"];
             $name = $row["nome"];
             $msg = $row["msg"];
+            $banner = $row["banner"];
         
             $tags = new Tags;
             $result = $this->getTags($id);
@@ -92,14 +48,14 @@ class Estabs{
             <div class="card mb-3 mx-auto" style="max-width: 55rem;" id="<?=$id?>" name="estabCard">
             <div class="row g-0">
                 <div class="col-md-5">
-                    <img src="../imgs/1.jpg" class="img-fluid rounded estabImg" alt="...">
+                    <img src="../imgs/banner/<?=$banner?>" class="img-fluid rounded estabImg" alt="...">
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
-                        <h5 class="card-title" name="estab"><?=$name?></h5>
+                        <h5 class="card-title notranslate" name="estab"><?=$name?></h5>
                         <p class="card-text"><?=$msg?></p>
                         <p class="card-text"><?=$tags->infoTags($result, $id)?></p>
-                        <p class="card-text"><small class="text-muted notranslate">Manel Manel</small> <a class="btn btn-info float-md-right text-capitalize" href="estab.php" role="button">Ver</a></p>
+                        <p class="card-text"><small class="text-muted notranslate">Manel Manel</small> <a class="btn btn-info float-md-right text-capitalize" href="estab.php?id=<?=$id?>" role="button">Ver</a></p>
                     </div>
                 </div>
             </div>
@@ -118,11 +74,44 @@ class Estabs{
         return $dados;
     }
 
-    public function getGender($gender){
-        if ($gender == 0)
-            echo "<label id='text' style='color:LightSkyBlue'>♂</label>";
-        else
-            echo "<label id='text' style='color:LightCoral'>♀</label>";
+    public function getContactos($id){
+        $sql="SELECT numero, contactos_tel.desc, categoria FROM contactos_tel 
+        INNER JOIN estabelecimentos ON contactos_tel.estabelecimento_id = estabelecimentos.id 
+        WHERE estabelecimento_id=$id";
+        $con = $this->conexao;
+        $resultado=$con->query($sql);
+        $dados=$resultado->fetchAll();
+
+        foreach($dados as $row){
+            $numero = $row['numero'];
+            $desc = $row['desc'];
+            $categoria = $row['categoria'];
+
+            switch($categoria){
+                case 0:
+                    $categoria = "&#128241; Telemóvel";
+                    break;
+                case 1:
+                    $categoria = "&#9742; Telefone";
+                    break;
+                case 2:
+                    $categoria = "&#128224; Fax";
+                    break;
+                default:
+                    $categoria = "&#10068; ???";
+                    break;
+            }
+
+            if ($desc != "")
+                $categoria = $categoria . " (" . $desc . ")";
+
+            ?><div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><?=$categoria?></span>
+                </div>
+                <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$numero?>">
+            </div><?php
+        }
     }
 
     public function infoOperatorDel($id){

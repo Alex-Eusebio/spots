@@ -1,3 +1,25 @@
+<?php
+    session_start();
+    require_once('../other/classes.php');
+
+    $id = $_GET['id'];
+
+    $estabs=new Estabs;
+    $result = $estabs->showOne($id);
+    foreach($result as $row){
+        $nome = $row['nome'];
+        $morada = $row['morada'];
+        $codpost = $row['codigoPostal'];
+        $mail = $row['mail'];
+        $msg = $row['msg'];
+        $logo = $row['logo'];
+        $banner = $row['banner'];
+    }
+
+    $tags = new Tags;
+    $resultTags = $estabs->getTags($id);
+?>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -7,57 +29,40 @@
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/divstruct.css" rel="stylesheet" type="text/css">
     <link href="../css/styles.css" rel="stylesheet" type="text/css">
-    <title class="notranslate">Estabelecimento</title>
+    <title class="notranslate"><?=$nome?></title>
 </head>
 <body>
 <?php include("../other/header.html");?>
 <div id="main">
-    <p class="h1 text-center text-capitalize notranslate">Estabelecimento Exemplo</p>
+    <p class="h1 text-center text-capitalize notranslate"><?=$nome?></p>
     <div class="card mb-3">
-        <img class="card-img-top" src="../imgs/1.jpg" alt="Card image cap">
+        <img class="card-img-top" src="../imgs/banner/<?=$banner?>" alt="Card image cap">
         <div class="card-body">
         <li class="media">
-            <img class="mr-3 estabLogo" src="../imgs/cavalo.jpg" alt="Generic placeholder image">
+            <img class="mr-3 estabLogo" src="../imgs/logo/<?=$logo?>" alt="Generic placeholder image">
             <div class="media-body">
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                <?=$msg?>
             </div>
         </li>
         </div>
         <ul class="list-group list-group-flush">
         <li class="list-group-item">
-            <a href="#" class="badge badge-secondary text-capitalize">Restaurante</a> <a href="#" class="badge badge-secondary text-capitalize">Peixe</a> <a href="#" class="badge badge-secondary text-capitalize">Portugues</a> <a href="#" class="badge badge-secondary text-capitalize">Barato</a> <a href="#" class="badge badge-secondary text-capitalize">Frutos do Mar</a> <a href="#" class="badge badge-secondary text-capitalize">Carne</a> <a href="#" class="badge badge-secondary text-capitalize">Secundario</a></p>
+            <?=$tags->infoTags($resultTags, $id)?>
         </li>
         <li class="list-group-item">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">&#127968; Morada</span>
                 </div>
-                <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="Rua do Tóze nº1 8700-123">
+                <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$morada." ".$codpost?>">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">&#128231; Email</span>
                 </div>
-                <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="mail@mail.com">
+                <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$mail?>">
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">&#128241; Telemóvel</span>
-                </div>
-                <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="9888888">
-            </div>  
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">&#9742; Telefone</span>
-                </div>
-                <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="9888888">
-            </div> 
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">&#128224; Fax</span>
-                </div>
-                <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="9888888">
-            </div>
+            <?=$estabs->getContactos($id)?>           
         </li>
         </ul>
     </div>

@@ -6,8 +6,10 @@ function searchTags() {
     var foundTags = [];
     tagSearch.forEach(a => {
         if(a.checked){
-            console.log(a.id);
-            foundTags.push(a.id);
+            let id = a.id;
+            let ida=id.substring(0, (a.id.length)-3);
+            console.log(ida);
+            foundTags.push(ida);
         }
     });
     console.log(foundTags);
@@ -48,6 +50,7 @@ function searchTags() {
     } 
   }
 
-  document.getElementsByName("tags").onclick = function(){
+function checkSearch($id) {
+    document.getElementById($id+"Src").checked = true;
     searchTags();
-  }
+}

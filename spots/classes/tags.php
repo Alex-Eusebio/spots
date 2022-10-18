@@ -37,7 +37,7 @@ class Tags{
 
             ?>
             
-            <a href="#" class="badge badge-secondary text-capitalize" name="<?=$estabId?>" id="<?=$id?>"><?=$name?></a><?php
+            <a href="#" class="badge badge-secondary text-capitalize" name="<?=$estabId?>" id="<?=$id?>" onclick="checkSearch(this.id)"><?=$name?></a><?php
         }
     }
 
@@ -49,7 +49,7 @@ class Tags{
             ?>
             
             <label class="badge badge-secondary text-capitalize active">
-                <input type="checkbox" name="tags" id="<?=$id?>" onclick="searchTags()"> <?=$name?>
+                <input type="checkbox" name="tags" id="<?=$id."Src"?>" onclick="searchTags()"> <?=$name?>
             </label><?php
         
         }

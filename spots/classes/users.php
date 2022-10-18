@@ -98,7 +98,7 @@ class Users{
         return $dados;
     }
 
-    public function showOneUser($id){
+    public function showOne($id){
         $sql = "SELECT *
         FROM users
         WHERE users.id = $id;";
@@ -130,42 +130,6 @@ class Users{
                 </div>
             </a></li>
             <?php ;
-        }
-    }
-
-    public function inforUserProfile($dados){
-        foreach($dados as $row){
-            $name = $row["name"];
-            $pfp = $row["profilepic"];
-            $nivel = $row["nivel"];
-            $mail = $row["mail"];
-            $tele = $row["telemovel"];
-
-            if ($pfp == "")
-                $pfp="default.png";
-
-            ?><p class="h1 text-center text-capitalize notranslate">User Exemplo</p>
-            <div class="card mb-3">
-                <div class="card-body">
-                <li class="media">
-                    <img class="mr-3 estabLogo" src="../pfp/<?=$pfp?>" alt="Generic placeholder image">
-                    <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">&#128231; Email</span>
-                        </div>
-                        <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$mail?>">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">&#128241; Telemóvel</span>
-                            </div>
-                            <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="<?$tele?>">
-                        </div>
-                    </li>
-                    </ul>
-                </li><?php
         }
     }
 
