@@ -37,7 +37,7 @@ class Tags{
 
             ?>
             
-            <a href="#" class="badge badge-secondary text-capitalize" name="<?=$estabId?>" id="<?=$id?>" onclick="checkSearch(this.id)"><?=$name?></a><?php
+            <a href="#" class="badge badge-secondary text-capitalize" name="<?=$estabId."ID"?>" id="<?=$id?>" onclick="checkSearch(this.id)"><?=$name?></a><?php
         }
     }
 

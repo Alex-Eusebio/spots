@@ -129,24 +129,7 @@ class Users{
                     <br>
                 </div>
             </a></li>
-            <?php ;
-        }
-    }
-
-    public function getUserNameDel($id){
-        $sql = "SELECT name, profilepic FROM users WHERE id = $id";
-
-        $con = $this->conexao;
-        $resultado=$con->query($sql);
-        $dados=$resultado->fetchAll();
-        foreach($dados as $row){
-            $pfp = "";
-
-            if ($row["profilepic"] == "")
-                $pfp="default.png";
-            ?>
-            <p id="t1"> Deseja eliminar a conta do Doutor </p> <p> <label id="text"><?=$row["name"]?></label> </p> <br>
-            <img id="imgIcon"src="imgs/pfp/<?=$pfp?>"><br> <?php
+            <?php 
         }
     }
 
@@ -162,91 +145,16 @@ class Users{
         $resultado=$con->query($sql);
     }
 
-    function getLikes($user){
-        $sql="SELECT *
-        FROM operators 
-        INNER JOIN users_liked_operator ON operators.id = users_liked_operator.operators_id 
-        INNER JOIN users ON users.id = users_liked_operator.users_id 
+    function getEstabUser($user){
+        $sql="SELECT estabelecimentos.id
+        FROM estabelecimentos 
+        INNER JOIN estab_users ON estabelecimento_id = estabelecimentos.id 
+        INNER JOIN users ON users.id = estab_users.user_id 
         WHERE users.id=$user";
         $con = $this->conexao;
         $resultado=$con->query($sql);
         $dados=$resultado->fetchAll();
         return $dados;
-    }
-
-    public function delete($id){
-        $con = $this->conexao;
-        $sql = "DELETE FROM users_liked_operator WHERE users_id = $id";
-        $resultado=$con->query($sql);
-
-        $sql = "DELETE FROM users WHERE id = $id";
-        $resultado=$con->query($sql);
-
-        if ($_SESSION['id'] == $id)
-            session_destroy();
-
-        if($resultado == TRUE){
-            header("location:index.php?alerta=6");
-        }else{
-            header("location:index.php?alerta=0");
-        }
-    }
-
-    public function infoEdit($id){
-        $sql = "SELECT * FROM users WHERE users.id = $_GET[id]";
-
-        $con = $this->conexao;
-        $resultado=$con->query($sql);
-        $dados=$resultado->fetchAll();
-        if (count($dados)>0){
-            foreach($dados as $row){
-                $pfp = $row["profilepic"];
-                if ($pfp == "")
-                    $pfp="default.png";
-                ?>
-                <section class="caixa2">
-                <form action="" method="POST" enctype="multipart/form-data">
-                <p id="text">Foto: </p>
-                <img class="imgPfp"id="imgPfp"src="imgs/pfp/<?=$pfp?>"><br>
-                <input type="file" id="pfp" name="pfp" accept="image/*"></p>
-                <p id="text">Nome: <input type="text" name="name" value="<?=$row['name']?>"></p>
-                <?php
-                if ($_SESSION['id'] != $_GET['id'] && $_SESSION['isadmin'] == TRUE){
-                    ?><label>Admin:</label><br>
-                    <input type="checkbox" id="isadmin" name="isadmin" value="1" <?php if ($row['isadmin']==true) echo "checked";?>>
-                    <?php
-                }
-                
-            }
-        }
-    }
-
-    public function edit($id){
-        $nome = $_POST['name'];
-        $isadmin = 0;
-        if (isset($_POST['isadmin']))
-            $isadmin = $_POST['isadmin'];
-
-        $pfp = $_FILES['pfp']['tmp_name'];
-
-        if ($pfp == ''){
-            $sql = "UPDATE users
-            SET name = '$nome', isadmin = $isadmin
-            WHERE id = $id";
-        } else {
-            deleteImgPfp($_GET['id']);
-            $pfp = uploadPhoto("pfp/", $nome, "pfp");//n da upload :madge: btw muda a bd pra q o branch n seja obrigatorio
-            $sql = "UPDATE users
-            SET name = '$nome', profilepic = '$pfp', isadmin = $isadmin
-            WHERE id = $id";
-        } 
-        $con = $this->conexao;
-        $resultado=$con->query($sql);
-        if($resultado == TRUE){
-            header("location:index.php?alerta=5");
-        }else{
-            header("location:index.php?alerta=0");
-        }
     }
 
     public function getImg($id){

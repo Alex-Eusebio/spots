@@ -31,8 +31,51 @@ class Estabs{
         return $dados;
     }
 
-    public function infoOperatorIndex($dados){
+    public function infoEstabUser($dados){
+        foreach($dados as $row){
+            $id = $row["id"];
+            $name = $row["nome"];
+            $msg = $row["msg"];
+            $logo = $row["logo"];
+            $views = $row["views"];
+            $viewsLast = $row["views"] - $row["viewsLast"];
         
+            $tags = new Tags;
+            $result = $this->getTags($id);
+            ?>
+            <p class="h2 text-center text-capitalize notranslate"><?=$name?></p>
+            <div class="card-body">
+            <li class="media">
+                <img class="mr-3 estabLogo" src="../imgs/logo/<?=$logo?>" alt="Generic placeholder image">
+                <div class="media-body">
+                    <?=$msg?>
+                    <p class="card-text"><a class="btn btn-info float-md-right text-capitalize" href="estab.php" role="button">Página da Empresa</a> <a class="btn btn-info float-md-right text-capitalize" href="estab.php" role="button">Editar Empresa</a></p>
+                </div>
+            </li>
+            </div>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <?=$tags->infoTags($result, $id)?>
+            </li>
+            <li class="list-group-item">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">&#128064; Visualizações</span>
+                    </div>
+                    <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$views."(+".$viewsLast.")"?>">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">&#11088; Favoritos</span>
+                    </div>
+                    <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="7 (-2)">
+                </div>
+                <span id="basic-addon1">*(+/-) é a diferença desde o último mês</span>
+            </li>
+            </ul>
+            <?php
+        
+        }
     }
 
     public function infoEstabList($dados){
@@ -45,17 +88,18 @@ class Estabs{
             $tags = new Tags;
             $result = $this->getTags($id);
             ?>
-            <div class="card mb-3 mx-auto" style="max-width: 55rem;" id="<?=$id?>" name="estabCard">
-            <div class="row g-0">
-                <div class="col-md-5">
-                    <img src="../imgs/banner/<?=$banner?>" class="img-fluid rounded estabImg" alt="...">
-                </div>
-                <div class="col-md-7">
-                    <div class="card-body">
-                        <h5 class="card-title notranslate" name="estab"><?=$name?></h5>
-                        <p class="card-text"><?=$msg?></p>
-                        <p class="card-text"><?=$tags->infoTags($result, $id)?></p>
-                        <p class="card-text"><small class="text-muted notranslate">Manel Manel</small> <a class="btn btn-info float-md-right text-capitalize" href="estab.php?id=<?=$id?>" role="button">Ver</a></p>
+            <div class="card mb-3 mx-auto" style="max-width: 55rem;" id="<?=$id."ID"?>" name="estabCard">
+                <div class="row g-0">
+                    <div class="col-md-5">
+                        <img src="../imgs/banner/<?=$banner?>" class="img-fluid rounded estabImg" alt="...">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h5 class="card-title notranslate" name="estab"><?=$name?></h5>
+                            <p class="card-text"><?=$msg?></p>
+                            <p class="card-text"><?=$tags->infoTags($result, $id)?></p>
+                            <p class="card-text"><small class="text-muted notranslate">Manel Manel</small> <a class="btn btn-info float-md-right text-capitalize" href="estab.php?id=<?=$id?>" role="button">Ver</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -124,16 +168,15 @@ class Estabs{
         }
     }
 
-    public function numLikes($id){
-        $sql="SELECT * FROM users_liked_operator WHERE operators_id=$id";
+    function getFav($estab){
+        $sql="SELECT COUNT(users.id) FROM users 
+        INNER JOIN user_fav_estab ON users.id = user_fav_estab.user_id 
+        INNER JOIN estabelecimentos ON user_fav_estab.estabelecimento_id = estabelecimentos.id
+        WHERE estabelecimentos.id = $estab";
         $con = $this->conexao;
         $resultado=$con->query($sql);
         $dados=$resultado->fetchAll();
-        if ($dados){
-            return count($dados);
-        }else{
-            return 0;
-        }
+        return $dados;
     }
 
     function checkLike($op){

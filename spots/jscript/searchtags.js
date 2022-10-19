@@ -37,16 +37,19 @@ function searchTags() {
 
         console.log(foundEstabsTags);
         document.getElementsByName("estabCard").forEach(a => {
-            console.log(a.id);
+            
             var hide = true;
             for(i=0;i<foundEstabsTags.length;i++){
+                console.log(a.id + " | " + foundEstabsTags[i] + " == " + (foundEstabsTags[i] == a.id));
                 if (foundEstabsTags[i] == a.id)
                     hide = false;
             }
+
+            console.log(hide);
+
             if (hide)
                 a.style.display = "none";
         });
-        
     } 
   }
 
