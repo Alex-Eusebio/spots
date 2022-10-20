@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    require_once('../other/classes.php');
+
+    $estabs=new Estabs;
+    $result = $estabs->showAll();
+?>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -20,20 +28,7 @@
 <div class="container">
 
 <!-- Full-width images with number text -->
-<div class="mySlides">
-  <div class="numbertext">1 / 3</div>
-    <img class="demoP img-fluid rounded mx-auto d-block" src="../imgs/1.jpg" alt="tit1">
-</div>
-
-<div class="mySlides">
-  <div class="numbertext">2 / 3</div>
-    <img class="demoP img-fluid rounded mx-auto d-block" src="../imgs/2.jpg" alt="tit2">
-</div>
-
-<div class="mySlides">
-  <div class="numbertext">3 / 3</div>
-    <img class="demoP img-fluid rounded mx-auto d-block" src="../imgs/3.jpg" alt="tit3">
-</div>
+<?=$estabs->infoEstabIndexBanner($result);?>
 
 <!-- Next and previous buttons -->
 <a class="prev" onclick="plusSlides(-1)"><&#10094;</a>
@@ -46,15 +41,7 @@
 
 <!-- Thumbnail images -->
 <div class="row">
-  <div class="column">
-    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/1.jpg" onclick="currentSlide(1)" alt="Text1">
-  </div>
-  <div class="column">
-    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/2.jpg" onclick="currentSlide(2)" alt="Text2">
-  </div>
-  <div class="column">
-    <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/3.jpg" onclick="currentSlide(3)" alt="Text3">
-  </div>
+  <?=$estabs->infoEstabIndexLogo($result);?>
 </div>
 <script type="text/javascript">
     currentSlide(slideIndex);

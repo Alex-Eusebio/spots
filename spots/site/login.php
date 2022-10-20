@@ -7,7 +7,7 @@
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/divstruct.css" rel="stylesheet" type="text/css">
     <link href="../css/login.css" rel="stylesheet" type="text/css">
-    <title>Login</title>
+    <title>Entrar</title>
 </head>
 <body>
 <?php include("../other/header.html");?>
@@ -26,7 +26,7 @@
 
           <form style="width: 23rem;">
 
-            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Entrar</h3>
 
             <div class="form-outline mb-4">
               <label class="form-label text-capitalize" for="form2Example18">Email</label>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="pt-1 mb-4">
-              <button class="btn btn-info btn-lg btn-block text-capitalize" type="button">Login</button>
+              <button class="btn btn-info btn-lg btn-block text-capitalize" type="button">Entrar</button>
             </div>
 
             <p class="small mb-5 pb-lg-2 text-capitalize"><a class="text-muted" href="#!">Esqueceu-se da palavra pass?</a></p>

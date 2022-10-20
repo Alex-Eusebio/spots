@@ -41,13 +41,13 @@
             <li class="list-group-item">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">&#128231; Email</span>
+                    <span class="input-group-text">&#128231; Email</span>
                 </div>
                 <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$mail?>">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">&#128241; Telemóvel</span>
+                        <span class="input-group-text">&#128241; Telemóvel</span>
                     </div>
                     <input readonly type="number" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$tele?>">
                 </div>

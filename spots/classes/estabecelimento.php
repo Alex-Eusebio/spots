@@ -54,36 +54,43 @@ class Estabs{
             $tags = new Tags;
             $result = $this->getTags($id);
             ?>
-            <p class="h2 text-center text-capitalize notranslate"><?=$name?></p>
             <div class="card-body">
-            <li class="media">
-                <img class="mr-3 estabLogo" src="../imgs/logo/<?=$logo?>" alt="Generic placeholder image">
-                <div class="media-body">
-                    <?=$msg?>
-                    <p class="card-text"><a class="btn btn-info float-md-right text-capitalize" href="estab.php" role="button">Página da Empresa</a> <a class="btn btn-info float-md-right text-capitalize" href="estab.php" role="button">Editar Empresa</a></p>
+                <div class="input-group mb-3">
+                <p class="h2 text-center text-capitalize notranslate"><?=$name?></p>
                 </div>
-            </li>
+                <div class="input-group mb-3">
+                <li class="media">
+                    <img class="mr-3 estabLogo" src="../imgs/logo/<?=$logo?>" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <?=$msg?>
+                        <div class="login-container">
+                            <a class="btn btn-info text-capitalize" href="estab.php" role="button">Página da Empresa</a> 
+                            <a class="btn btn-info text-capitalize" href="estab.php" role="button">Editar Empresa</a>
+                        </div>
+                    </div>
+                </li>
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <?=$tags->infoTags($result, $id)?>
+                </li>
+                <li class="list-group-item">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">&#128064; Visualizações</span>
+                        </div>
+                        <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$viewText?>">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">&#11088; Favoritos</span>
+                        </div>
+                        <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$favText?>">
+                    </div>
+                    <span>*(+/-) é a diferença desde o último mês</span>
+                </li>
+                </ul>
             </div>
-            <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <?=$tags->infoTags($result, $id)?>
-            </li>
-            <li class="list-group-item">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">&#128064; Visualizações</span>
-                    </div>
-                    <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$viewText?>">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">&#11088; Favoritos</span>
-                    </div>
-                    <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$favText?>">
-                </div>
-                <span id="basic-addon1">*(+/-) é a diferença desde o último mês</span>
-            </li>
-            </ul>
             <?php
         
         }
@@ -116,6 +123,36 @@ class Estabs{
             </div>
             <?php
         
+        }
+    }
+
+    public function infoEstabIndexBanner($dados){
+        $i = 1;
+        foreach($dados as $row){
+            $id = $row["id"];
+            $nome = $row["nome"];
+            $banner = $row["banner"];
+
+            ?><div class="mySlides">
+                <div class="numbertext"><?=$i?> / <?=sizeof($dados)?></div>
+                    <img class="demoP img-fluid rounded mx-auto d-block" src="../imgs/banner/<?=$banner?>" alt="<?=$nome?>">
+                </div><?php
+            $i++;
+        }
+    }
+
+    public function infoEstabIndexLogo($dados){
+        $i = 1;
+        foreach($dados as $row){
+            $id = $row["id"];
+            $msg = $row["msg"];
+            $logo = $row["logo"];
+            
+            ?>
+            <div class="column">
+              <img class="demo cursor img-fluid mx-auto d-block" src="../imgs/logo/<?=$logo?>" onclick="currentSlide(<?=$i?>)" alt="<?=$msg?>">
+            </div><?php
+            $i++;
         }
     }
 

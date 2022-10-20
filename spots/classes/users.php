@@ -90,7 +90,6 @@ class Users{
     }
 
     public function showAllUsers(){
-
         $sql = "SELECT * FROM users ORDER BY name ASC";
         $con = $this->conexao;
         $resultado=$con->query($sql);
