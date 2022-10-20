@@ -30,7 +30,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text">&#x1F50D;</div>
         </div>
-        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Pesquisar...">
+        <input type="text" class="form-control" id="inlineFormInputGroup" onkeyup="searchText(this)" placeholder="Pesquisar...">
       </div>
 
     <p>
@@ -44,7 +44,7 @@
         </div>
     </div>
     </div>
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column content">
         <fieldset class="border border-warning destaques" style="margin-bottom: 1rem">
             <legend class="text-left text-capitalize">Destaques</legend>
         </fieldset>

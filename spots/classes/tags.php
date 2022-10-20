@@ -49,7 +49,7 @@ class Tags{
             ?>
             
             <label class="badge badge-secondary text-capitalize active">
-                <input type="checkbox" name="tags" id="<?=$id."Src"?>" onclick="searchTags()"> <?=$name?>
+                <input type="checkbox" name="tags" id="<?=$id."Src"?>" onclick="searchTags(false)"> <?=$name?>
             </label><?php
         
         }

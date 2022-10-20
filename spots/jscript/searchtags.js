@@ -1,7 +1,10 @@
-function searchTags() {
-    document.getElementsByName("estabCard").forEach(a => {
-        a.style.display = "block";
-    });
+function searchTags(fromText) {
+    if (!fromText){
+        document.getElementsByName("estabCard").forEach(a => {
+            a.style.display = "";
+        });
+    }
+
     let tagSearch = document.getElementsByName("tags");
     var foundTags = [];
     tagSearch.forEach(a => {
@@ -53,7 +56,28 @@ function searchTags() {
     } 
   }
 
-function checkSearch($id) {
-    document.getElementById($id+"Src").checked = true;
-    searchTags();
+function checkSearch(id) {
+    document.getElementById(id+"Src").checked = true;
+    searchTags(false);
 }
+
+function searchText(input) {
+    // Declare variables
+    var filter, ul, li, a, i, txtValue;
+    //input = document.getElementsByClassName('search');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("content");
+    li = document.getElementsByName('estabCard');
+  
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("h5")[0];
+      txtValue = a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+    searchTags(true);
+  }

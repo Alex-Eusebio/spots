@@ -39,6 +39,17 @@ class Estabs{
             $logo = $row["logo"];
             $views = $row["views"];
             $viewsLast = $row["views"] - $row["viewsLast"];
+            $favLast = $this->getFav($id) - $row["favLast"];
+
+            if ($viewsLast >= 0)
+                $viewText = $views."(+".$viewsLast.")";
+            else
+                $viewText = $views."(".$viewsLast.")";
+
+            if ($favLast >= 0)
+                $favText =  $this->getFav($id)."(+".$favLast.")";
+            else
+                $favText =  $this->getFav($id)."(".$favLast.")";
         
             $tags = new Tags;
             $result = $this->getTags($id);
@@ -62,13 +73,13 @@ class Estabs{
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">&#128064; Visualizações</span>
                     </div>
-                    <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$views."(+".$viewsLast.")"?>">
+                    <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$viewText?>">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">&#11088; Favoritos</span>
                     </div>
-                    <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="7 (-2)">
+                    <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$favText?>">
                 </div>
                 <span id="basic-addon1">*(+/-) é a diferença desde o último mês</span>
             </li>
@@ -176,7 +187,8 @@ class Estabs{
         $con = $this->conexao;
         $resultado=$con->query($sql);
         $dados=$resultado->fetchAll();
-        return $dados;
+        foreach($dados as $row)
+            return $row["COUNT(users.id)"];
     }
 
     function checkLike($op){

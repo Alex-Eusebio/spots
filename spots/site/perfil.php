@@ -32,9 +32,9 @@
 <body>
 <?php include("../other/header.html");?>
 <div id="main">
-    <p class="h1 text-center text-capitalize notranslate"><?=$nome?></p>
     <div class="card mb-3">
         <div class="card-body">
+        <p class="h1 text-center text-capitalize notranslate"><?=$nome?></p>
         <li class="media">
             <img class="mr-3 estabLogo" src="../imgs/pfp/<?=$pfp?>" alt="Generic placeholder image">
             <ul class="list-group list-group-flush">

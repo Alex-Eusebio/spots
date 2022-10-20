@@ -17,3 +17,9 @@ https://www.easypay.pt/api/
 SISTEMA DE VIEW COUNT
 Funcionario ou Dono n conta pra VIEW
 Depois de 5s na pagina conta 1 view, mas poderá dar outra view so depois de 30min
+
+DATAS
+0001-01-01 00:00:00
+9999-12-31 23:59:59
+
+2022-10-20 11:25:43
