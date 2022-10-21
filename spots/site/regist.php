@@ -46,15 +46,13 @@
             title="Deverá conter pelo menos um número, uma letra maiuscula, uma letra minuscula e deve conter entre 8 a 25 characteres" 
             required>
             </div>
-            <div class="form-label text-capitalize">Mostrar Palavra Pass</div>
-          <div class="col-sm-0">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" onclick="checkPass()">
-            </div>
-          </div>
+            <div class="form-outline mb-4">
+              <input type="checkbox" class="custom-control-input" id="passCheck" type="checkbox" onclick="checkPass()">
+              <label class="custom-control-label" for="passCheck">Mostrar Palavra Pass</label>
+            </div>  
 
             <div class="pt-1 mb-4">
-              <button class="btn btn-info btn-lg btn-block text-capitalize" type="button">Entrar</button>
+              <button class="btn btn-info btn-lg btn-block text-capitalize" type="button">Registar</button>
             </div>
 
           </form>
@@ -66,6 +64,7 @@
           alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
       </div>
     </div>
+    <br>
     <div id="message" class="col-sm-6">
         <h3>A palavra pass deverá conter o seguinte:</h3>
         <p id="letter" class="invalid">Uma letra <b>minuscula</b></p>

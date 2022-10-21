@@ -23,3 +23,6 @@ DATAS
 9999-12-31 23:59:59
 
 2022-10-20 11:25:43
+
+QR CODE GENERATION
+https://www.javatpoint.com/qr-code-generator-using-html-css-and-jquery

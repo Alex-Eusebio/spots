@@ -64,6 +64,13 @@
             </div>
             <?=$estabs->getContactos($id)?>           
         </li>
+        <li class="list-group-item">
+            <h4>Produtos</h4>
+            <ul class="list-group">
+                <?=$estabs->getProdutos($id)?>
+                <li class="list-group-item"></li>
+            </ul>
+        </li>
         </ul>
     </div>
 </body>

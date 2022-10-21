@@ -42,14 +42,14 @@ class Estabs{
             $favLast = $this->getFav($id) - $row["favLast"];
 
             if ($viewsLast >= 0)
-                $viewText = $views."(+".$viewsLast.")";
+                $viewText = $views." (+".$viewsLast.")";
             else
-                $viewText = $views."(".$viewsLast.")";
+                $viewText = $views." (".$viewsLast.")";
 
             if ($favLast >= 0)
-                $favText =  $this->getFav($id)."(+".$favLast.")";
+                $favText =  $this->getFav($id)." (+".$favLast.")";
             else
-                $favText =  $this->getFav($id)."(".$favLast.")";
+                $favText =  $this->getFav($id)." (".$favLast.")";
         
             $tags = new Tags;
             $result = $this->getTags($id);
@@ -64,8 +64,8 @@ class Estabs{
                     <div class="media-body">
                         <?=$msg?>
                         <div class="login-container">
-                            <a class="btn btn-info text-capitalize" href="estab.php" role="button">Página da Empresa</a> 
-                            <a class="btn btn-info text-capitalize" href="estab.php" role="button">Editar Empresa</a>
+                            <a class="btn btn-info text-capitalize" href="estab.php?id=<?=$id?>" role="button">Página da Empresa</a> 
+                            <a class="btn btn-info text-capitalize" href="estab.php?id=<?=$id?>" role="button">Editar Empresa</a>
                         </div>
                     </div>
                 </li>
@@ -226,6 +226,22 @@ class Estabs{
         $dados=$resultado->fetchAll();
         foreach($dados as $row)
             return $row["COUNT(users.id)"];
+    }
+
+    function getProdutos($estab){
+        $sql="SELECT produtos.nome, produtos.preco 
+        FROM produtos INNER JOIN estabelecimentos 
+        ON produtos.estabelecimentos_id = estabelecimentos.id
+        WHERE estabelecimentos.id = $estab";
+        $con = $this->conexao;
+        $resultado=$con->query($sql);
+        $dados=$resultado->fetchAll();
+
+        foreach($dados as $row){
+            $nome = $row["nome"];
+            $preco = $row["preco"];
+            ?> <li class="list-group-item"><?=$nome?> - <?=$preco."€"?></li> <?php
+        }
     }
 
     function checkLike($op){
