@@ -46,31 +46,45 @@
         </li>
         </div>
         <ul class="list-group list-group-flush">
+        <?php if (sizeof($resultTags) > 0) { ?>
         <li class="list-group-item">
             <?=$tags->infoTags($resultTags, $id)?>
         </li>
+        <?php }  ?>
         <li class="list-group-item">
+        <?php if ($morada != "" || $codpost != "") { ?>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">&#127968; Morada</span>
                 </div>
                 <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$morada." ".$codpost?>">
             </div>
+            <?php } ?>
+            <?php if ($mail != "") { ?>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">&#128231; Email</span>
                 </div>
                 <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$mail?>">
             </div>
+            <?php } ?>
             <?=$estabs->getContactos($id)?>           
         </li>
+        <?php $produtos = $estabs->getProdutos($id)?>
+        <?php if (sizeof($produtos) > 0){ ?>
         <li class="list-group-item">
             <h4>Produtos</h4>
             <ul class="list-group">
-                <?=$estabs->getProdutos($id)?>
+                <?php 
+                foreach($produtos as $row){
+                    $nome = $row["nome"];
+                    $preco = $row["preco"];
+                    ?> <li class="list-group-item"><?=$nome?> - <?=$preco."€"?></li> <?php
+                }?>
                 <li class="list-group-item"></li>
             </ul>
         </li>
+        <?php } ?>
         </ul>
     </div>
 </body>

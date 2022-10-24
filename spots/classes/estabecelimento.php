@@ -46,10 +46,12 @@ class Estabs{
             else
                 $viewText = $views." (".$viewsLast.")";
 
+
             if ($favLast >= 0)
                 $favText =  $this->getFav($id)." (+".$favLast.")";
             else
                 $favText =  $this->getFav($id)." (".$favLast.")";
+            
         
             $tags = new Tags;
             $result = $this->getTags($id);
@@ -64,16 +66,18 @@ class Estabs{
                     <div class="media-body">
                         <?=$msg?>
                         <div class="login-container">
-                            <a class="btn btn-info text-capitalize" href="estab.php?id=<?=$id?>" role="button">Página da Empresa</a> 
-                            <a class="btn btn-info text-capitalize" href="estab.php?id=<?=$id?>" role="button">Editar Empresa</a>
+                            <a class="btn btn-info text-capitalize" href="estab.php?id=<?=$id?>" role="button">Página do Estabelecimento</a> 
+                            <a class="btn btn-info text-capitalize" href="estab.php?id=<?=$id?>" role="button">Editar</a>
                         </div>
                     </div>
                 </li>
                 </div>
                 <ul class="list-group list-group-flush">
+                <?php if (sizeof($result) > 0) {?>
                 <li class="list-group-item">
                     <?=$tags->infoTags($result, $id)?>
                 </li>
+                <?php }?>
                 <li class="list-group-item">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -236,12 +240,7 @@ class Estabs{
         $con = $this->conexao;
         $resultado=$con->query($sql);
         $dados=$resultado->fetchAll();
-
-        foreach($dados as $row){
-            $nome = $row["nome"];
-            $preco = $row["preco"];
-            ?> <li class="list-group-item"><?=$nome?> - <?=$preco."€"?></li> <?php
-        }
+        return $dados;
     }
 
     function checkLike($op){
