@@ -20,7 +20,7 @@
     <div class="card-body">
         <h5 class="card-title">Cavalo Marinho</h5>
         <p class="card-text">Pode criar um anuncio no nosso site.</p>
-        <a href="#" class="btn btn-primary align-text-bottom">00.00€</a>
+        <a href="add_estab.php?tier=1" class="btn btn-primary align-text-bottom">00.00€</a>
     </div>
     </div>
 
@@ -29,7 +29,7 @@
     <div class="card-body">
         <h5 class="card-title">Camaleão</h5>
         <p class="card-text">Pode criar um anuncio no nosso site, terá prioridade nas pesquisas e poderá aparecer nos destaques.</p>
-        <a href="#" class="btn btn-primary align-text-bottom">00.00€</a>
+        <a href="add_estab.php?tier=2" class="btn btn-primary align-text-bottom">00.00€</a>
     </div>
     </div>
 
@@ -38,7 +38,7 @@
     <div class="card-body">
         <h5 class="card-title">Cegonha</h5>
         <p class="card-text">Pode criar um anuncio no nosso site, terá mais prioridade nas pesquisas, poderá aparecer nos destaques e aparecerá na primeira página.</p>
-        <a href="#" class="btn btn-primary align-text-middle">00.00€</a>
+        <a href="add_estab.php?tier=3" class="btn btn-primary align-text-middle">00.00€</a>
     </div>
     </div>
     </div>

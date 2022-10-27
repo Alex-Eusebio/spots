@@ -32,17 +32,16 @@
         </div>
         <input type="text" class="form-control" id="inlineFormInputGroup" onkeyup="searchText(this)" placeholder="Pesquisar...">
       </div>
-
-    <p>
-        <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Mais
-        </a>
-    </p>
-    <div class="collapse" id="collapseExample">
-        <div class="btn-group-toggle" data-toggle="badges" id="tagList">
-            <?php $tags->searchTags($resultTag)?>
+        <p>
+            <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Mais
+            </a>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="btn-group-toggle" data-toggle="badges" id="tagList">
+                <?php $tags->searchTags($resultTag)?>
+            </div>
         </div>
-    </div>
     </div>
     <div class="d-flex flex-column content">
         <fieldset class="border border-warning destaques" style="margin-bottom: 1rem">

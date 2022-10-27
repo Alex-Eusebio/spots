@@ -13,8 +13,10 @@ class Estabs{
     }
 
     public function showAll(){
-        $sql="SELECT *
-        FROM estabelecimentos";
+        $sql="SELECT estabelecimentos.id, estabelecimentos.nome, estabelecimentos.msg, estabelecimentos.banner, estabelecimentos.logo
+        FROM estabelecimentos INNER JOIN tiers ON estabelecimentos.token = tiers.token
+        WHERE tiers.dataEnd > NOW() 
+        ORDER BY tiers.tier DESC, estabelecimentos.nome ASC";
         $con = $this->conexao;
         $resultado=$con->query($sql);
         $dados=$resultado->fetchAll();
@@ -31,7 +33,7 @@ class Estabs{
         return $dados;
     }
 
-    public function infoEstabUser($dados){
+    public function infoEstabUser($dados, $expired){
         foreach($dados as $row){
             $id = $row["id"];
             $name = $row["nome"];
@@ -51,15 +53,42 @@ class Estabs{
                 $favText =  $this->getFav($id)." (+".$favLast.")";
             else
                 $favText =  $this->getFav($id)." (".$favLast.")";
-            
+
+            if ($expired > 0){
+                $month = floor(($expired/24)/31);
+                $day = floor($expired/24)-$month*30;
+                $hours = floor($expired)-($day*24)-(($month*30)*24);
+                $min = floor($expired*60)-($hours*60)-(($day*24)*60)-((($month*30)*24)*60);
+
+                $text = "";
+                if ($month >= 1)
+                    $text = $text . $month . " meses ";
+
+                if ($day >= 1)
+                    $text = $text . $day . " dias ";
+
+                if ($hours >= 1)
+                    $text = $text . $hours . " horas ";
+
+                if ($min >= 0)
+                    $text = $text . $min . " minutos";
+            }
         
             $tags = new Tags;
             $result = $this->getTags($id);
             ?>
             <div class="card-body">
                 <div class="input-group mb-3">
-                <p class="h2 text-center text-capitalize notranslate"><?=$name?></p>
-                </div>
+                <p class="h2 text-center text-capitalize notranslate"><?=$name?>
+                <?php if ($expired == -1) {?>
+                    <span class="badge badge-danger translate">&#128721; Licença Expirada</span>
+                <?php } else if ($expired > 0) { ?>
+                    <span class="badge badge-warning translate">&#9888; Restam <?=$text?> para a licença expirar </span>
+                <?php } else if ($expired == 0) {?>
+                    <span class="badge badge-success translate">&#10003; Licença Ativa </span>
+                <?php } ?>
+                </p>
+                </div> 
                 <div class="input-group mb-3">
                 <li class="media">
                     <img class="mr-3 estabLogo" src="../imgs/logo/<?=$logo?>" alt="Generic placeholder image">
@@ -67,7 +96,7 @@ class Estabs{
                         <?=$msg?>
                         <div class="login-container">
                             <a class="btn btn-info text-capitalize" href="estab.php?id=<?=$id?>" role="button">Página do Estabelecimento</a> 
-                            <a class="btn btn-info text-capitalize" href="estab.php?id=<?=$id?>" role="button">Editar</a>
+                            <a class="btn btn-info text-capitalize" href="edit_estab.php?id=<?=$id?>" role="button">Editar</a>
                         </div>
                     </div>
                 </li>

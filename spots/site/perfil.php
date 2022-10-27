@@ -1,5 +1,6 @@
 <?php
     session_start();
+    date_default_timezone_set("Europe/Lisbon");
     require_once('../other/classes.php');
 
     $id = $_GET['id'];
@@ -65,9 +66,27 @@
         $result = $users->getEstabUser($id);
         foreach($result as $row){
             $id_ = $row["id"];
-            $result = $estabs->showOne($id_);
+            $dataEnd = $row["dataEnd"];
+            $tier = $row["tier"];
 
-            echo $estabs->infoEstabUser($result);
+            $data = date("Y-m-d H:i:s");
+
+            $t1 = strtotime( $data );
+            $t2 = strtotime( $dataEnd );
+
+            $diff = $t2 - $t1;
+            $hours = $diff / 3600;
+
+            if ($hours <= 0)
+                $expired = -1;
+            else if ($hours <= 168 && $hours > 0)
+                $expired = $hours;
+            else
+                $expired = 0;
+
+
+            $result = $estabs->showOne($id_);
+            echo $estabs->infoEstabUser($result, $expired);
         } ?>
     </div>
 </body>

@@ -145,11 +145,12 @@ class Users{
     }
 
     function getEstabUser($user){
-        $sql="SELECT estabelecimentos.id
+        $sql="SELECT estabelecimentos.id, tiers.dataEnd, tiers.tier
         FROM estabelecimentos 
         INNER JOIN estab_users ON estabelecimento_id = estabelecimentos.id 
         INNER JOIN users ON users.id = estab_users.user_id 
-        WHERE users.id=$user";
+        INNER JOIN tiers ON estabelecimentos.token = tiers.token
+        WHERE users.id=$user ORDER BY dataEnd DESC, tier ASC";
         $con = $this->conexao;
         $resultado=$con->query($sql);
         $dados=$resultado->fetchAll();
