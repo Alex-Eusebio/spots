@@ -55,6 +55,7 @@ class Estabs{
                 $favText =  $this->getFav($id)." (".$favLast.")";
 
             if ($expired > 0){
+                //floor arredonda para baixo
                 $month = floor(($expired/24)/31);
                 $day = floor($expired/24)-$month*30;
                 $hours = floor($expired)-($day*24)-(($month*30)*24);

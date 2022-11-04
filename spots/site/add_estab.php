@@ -3,6 +3,7 @@
     require_once('../other/classes.php');
 
     $tier = $_GET['tier'];
+    $id = 1;
 
     $estabs=new Estabs;
     $result = $estabs->showOne($id);
@@ -34,58 +35,28 @@
 <body>
 <?php include("../other/header.html");?>
 <div id="main">
-    <p class="h1 text-center text-capitalize notranslate"><?=$nome?></p>
-    <div class="card mb-3">
-        <img class="card-img-top" src="../imgs/banner/<?=$banner?>" alt="Card image cap">
-        <div class="card-body">
-        <li class="media">
-            <img class="mr-3 estabLogo" src="../imgs/logo/<?=$logo?>" alt="Generic placeholder image">
-            <div class="media-body">
-                <?=$msg?>
-            </div>
-        </li>
+    <div class="jumbotron">
+    <p class="h1 text-center text-capitalize">Novo Estabelecimento</p>
+    <form>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Nome</label>
+            <input type="text" class="form-control" name="nome" placeholder="Empresa Exemplo">
         </div>
-        <ul class="list-group list-group-flush">
-        <?php if (sizeof($resultTags) > 0) { ?>
-        <li class="list-group-item">
-            <?=$tags->infoTags($resultTags, $id)?>
-        </li>
-        <?php }  ?>
-        <li class="list-group-item">
-        <?php if ($morada != "" || $codpost != "") { ?>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">&#127968; Morada</span>
-                </div>
-                <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$morada." ".$codpost?>">
-            </div>
-            <?php } ?>
-            <?php if ($mail != "") { ?>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">&#128231; Email</span>
-                </div>
-                <input readonly type="text" class="form-control notranslate" aria-describedby="basic-addon1" value="<?=$mail?>">
-            </div>
-            <?php } ?>
-            <?=$estabs->getContactos($id)?>           
-        </li>
-        <?php $produtos = $estabs->getProdutos($id)?>
-        <?php if (sizeof($produtos) > 0){ ?>
-        <li class="list-group-item">
-            <h4>Produtos</h4>
-            <ul class="list-group">
-                <?php 
-                foreach($produtos as $row){
-                    $nome = $row["nome"];
-                    $preco = $row["preco"];
-                    ?> <li class="list-group-item"><?=$nome?> - <?=$preco."€"?></li> <?php
-                }?>
-                <li class="list-group-item"></li>
-            </ul>
-        </li>
-        <?php } ?>
-        </ul>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Morada</label>
+            <input type="text" class="form-control" name="morada" placeholder="Rua dos Exemplos nº10">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Código Postal</label>
+            <input type="text" class="form-control" name="cod_post" placeholder="3700-000" pattern="^\d{4}-\d{3}$" title="4 números - 3 números">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Descrição</label>
+            <textarea class="form-control" name="msg" rows="4" placeholder="Descrição do seu estabelecimento para atrair clientes"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+    </form>
     </div>
+</div>
 </body>
 </html>
